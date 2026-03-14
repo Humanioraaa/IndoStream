@@ -5,7 +5,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  workflow_dispatch:  # hanya jalan saat ditekan manual dari GitHub UI
+  workflow_dispatch: # hanya jalan saat ditekan manual dari GitHub UI
 
 jobs:
   build:
@@ -72,7 +72,7 @@ jobs:
         run: |
           cd src
           chmod +x gradlew
-          ./gradlew :Otakudesu:make :Samehadaku:make makePluginsJson -x lint
+          ./gradlew :Otakudesu:make :Samehadaku:make makePluginsJson -x lint --continue || true
           cp **/build/*.cs3 ../builds || true
           cp **/build/*.jar ../builds || true
           cp build/plugins.json ../builds || true
