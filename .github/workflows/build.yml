@@ -5,7 +5,9 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  workflow_dispatch: # hanya jalan saat ditekan manual dari GitHub UI
+  workflow_dispatch: # bisa jalan manual dari GitHub UI
+  push:
+    branches: [ "main" ] # auto-run saat push ke main
 
 jobs:
   build:
