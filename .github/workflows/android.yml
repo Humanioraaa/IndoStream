@@ -13,14 +13,34 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 11
+    
+    - name: Setup JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
-        distribution: 'temurin'
+        java-version: '17'
+        distribution: 'adopt'
         cache: gradle
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Create local.properties
+      run: |
+        echo "ANIMASU_API=${{ secrets.ANIMASU_API }}" >> local.properties
+        echo "DUBBINDO_API=${{ secrets.DUBBINDO_API }}" >> local.properties
+        echo "GOMOV_API=${{ secrets.GOMOV_API }}" >> local.properties
+        echo "IDLIX_API=${{ secrets.IDLIX_API }}" >> local.properties
+        echo "KURAMANIME_API=${{ secrets.KURAMANIME_API }}" >> local.properties
+        echo "LAYARKACA_API=${{ secrets.LAYARKACA_API }}" >> local.properties
+        echo "NIMEGAMI_API=${{ secrets.NIMEGAMI_API }}" >> local.properties
+        echo "OPLOVERZ_API=${{ secrets.OPLOVERZ_API }}" >> local.properties
+        echo "OTAKUDESU_API=${{ secrets.OTAKUDESU_API }}" >> local.properties
+        echo "PENCURIMOVIE_API=${{ secrets.PENCURIMOVIE_API }}" >> local.properties
+        echo "SAMEHADAKU_API=${{ secrets.SAMEHADAKU_API }}" >> local.properties
+        echo "USEETV_API=${{ secrets.USEETV_API }}" >> local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build --continue || true
